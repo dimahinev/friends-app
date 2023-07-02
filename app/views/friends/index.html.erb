@@ -24,13 +24,10 @@
           <td><%= friend.phone %></td>
           <td><%= friend.twitter %></td>
           <td>
-            <div class="d-flex flex-row gap">
-              <div class="btn-group">
-                <%= link_to 'Show', friend, class: "btn btn-primary" %>
-                <%= link_to 'Edit', edit_friend_path(friend), class: "btn btn-warning" %>
-              </div>
-
-              <%= button_to 'Remove', friend, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', remote: true %>
+            <div class="btn-group">
+              <%= link_to 'Show', friend, class: "btn btn-primary" %>
+              <%= link_to 'Edit', edit_friend_path(friend), class: "btn btn-warning" %>
+<%= link_to 'Remove', friend, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', remote: true, 'data-confirm-reload': 'true' %>
             </div>
           </td>
         </tr>
@@ -41,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Friend', new_friend_path, class: "btn btn-secondary" %>
+<%= link_to 'New Friend', new_friend_path, class: "btn btn-dark" %>
