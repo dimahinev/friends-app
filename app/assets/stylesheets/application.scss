@@ -14,11 +14,30 @@
  *= require_self
  */
 
- .gap, .gap-1 {
+@import "font-awesome";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1;
+}
+
+.gap,
+.gap-1 {
   gap: 4px;
- }
- 
- 
- .gap-2 {
+}
+
+.gap-2 {
   gap: 8px;
- }
+}
+
+.mt-10 {
+  margin-top: 6rem;
+}
