@@ -1,5 +1,11 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
+  # when user is not authenticated, dont allow them to do anything except index and show
+  before_action :authenticate_user!, except: [:index, :show]
+
+  # look up and see before we do anything, if the user is the correct user
+  # only for pages edit, update, and destroy
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /friends or /friends.json
   def index
@@ -12,7 +18,9 @@ class FriendsController < ApplicationController
 
   # GET /friends/new
   def new
-    @friend = Friend.new
+    # @friend = Friend.new
+
+    @friend = current_user.friends.build()
   end
 
   # GET /friends/1/edit
@@ -21,7 +29,8 @@ class FriendsController < ApplicationController
 
   # POST /friends or /friends.json
   def create
-    @friend = Friend.new(friend_params)
+    # @friend = Friend.new(friend_params)
+    @friend = current_user.friends.build(friend_params)
 
     respond_to do |format|
       if @friend.save
@@ -57,14 +66,25 @@ class FriendsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_friend
-      @friend = Friend.find(params[:id])
-    end
+  # The params method is automatically available in Rails controllers and
+  # is typically used to retrieve and manipulate data sent from the client.
+  def correct_user
+    @friend = current_user.friends.find_by(id: params[:id])
 
-    # Only allow a list of trusted parameters through.
-    def friend_params
-      params.require(:friend).permit(:first_name, :last_name, :email, :phone, :twitter)
+    if @friend.nil?
+      redirect_to friends_path, notice: "Not authorized to edit this friend"
     end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_friend
+    @friend = Friend.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def friend_params
+    params.require(:friend).permit(:first_name, :last_name, :email, :phone, :twitter, :user_id)
+  end
 end
