@@ -15,8 +15,12 @@
     "@babel/plugin-proposal-private-methods": "^7.21.4-esm.4",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@prettier/plugin-ruby": "^3.2.2",
+    "babel-cli": "^6.26.0",
     "prettier": "^2.8.8",
     "prettier-plugin-erb": "^0.4.0",
     "webpack-dev-server": "^3"
+  },
+  "engines": {
+    "node": "16.15.0"
   }
 }
