@@ -4,7 +4,6 @@
     <table class="table table-striped table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
-          <th># ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
@@ -16,7 +15,6 @@
         <% @friends.each do |friend| %>
           <% if friend.user == current_user  %>
             <tr>
-              <td><%= friend.user_id %></td>
               <td>
                 <%= link_to friend.first_name + ' ' + friend.last_name , friend %>
               </td>
